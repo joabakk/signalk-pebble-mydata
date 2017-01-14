@@ -5,11 +5,9 @@ const debug = require('debug')('signalk-pebble-mydata')
 const _ = require('lodash')
 const util = require('util')
 
-/*
 const relevantKeys = Object.keys(signalkSchema.metadata)
   .filter(s => s.indexOf('/vessels/*') >= 0)
   .map(s => s.replace('/vessels/*', '').replace(/\//g, '.').replace(/RegExp/g, '*').substring(1)).sort()
-*/
 
 var jsonContent = ""
 
@@ -24,7 +22,7 @@ module.exports = function(app) {
   plugin.schema = {
     type: "object",
     title: "A signalk node plugin to show boat data on Pebble smartwatch",
-    description: "Point your MyData app to the address: http://<IP>:<port>/plugin/" + plugin.id + "/pebble.json",
+    description: "Point your MyData app to the address: http://<IP>:<port>/plugins/" + plugin.id + "/pebble.json",
     required: [
       "refresh", "vibrate", "font", "theme", "scroll", "light", "blink", "updown"
     ],
@@ -37,21 +35,24 @@ module.exports = function(app) {
     },
     vibrate: {
       type: "number",
-      title: "Vibration (0 - Don't vibrate),(1 - Short vibrate), (2 - Double vibrate), (3 - Long vibrate)",
+      title: "Vibration",
       default: 0,
-      "enum": [0,1,2,3]
+      "enum": [0,1,2,3],
+      enumNames: ["Don't vibrate", "Short vibrate", "Double vibrate", "Long vibrate)"]
     },
     font: {
       type: "number",
-      title: "font size 1 - GOTHIC_14, 2 - GOTHIC_14_BOLD, 3 - GOTHIC_18, 4 - GOTHIC_18_BOLD, 5 - GOTHIC_24, 6 - GOTHIC_24_BOLD, 7 - GOTHIC_28, 8 - GOTHIC_28_BOLD",
+      title: "Font size",
       default: 5,
-      "enum": [1,2,3,4,5,6,7,8]
+      "enum": [1,2,3,4,5,6,7,8],
+      enumNames: ["GOTHIC_14", "GOTHIC_14_BOLD", "GOTHIC_18", "GOTHIC_18_BOLD", "GOTHIC_24", "GOTHIC_24_BOLD", "GOTHIC_28", "GOTHIC_28_BOLD"]
     },
     theme: {
       type: "number",
       title: "Theme, 0 for black and 1 for white",
       default: 0,
-      "enum": [0,1]
+      "enum": [0,1],
+      enumNames: ["black", "white"]
     },
     scroll: {
       type: "number",
@@ -60,20 +61,23 @@ module.exports = function(app) {
     },
     light: {
       type: "number",
-      title: "0 - Do nothing, 1 - Turn pebble light on for short time",
+      title: "Background light",
       default: 0,
-      "enum": [0,1]
+      "enum": [0,1],
+      enumNames: ["Do nothing", "Turn Pebble light on for short time"]
     },
     blink: {
       type: "number",
-      title: "1..10 - Blink content count (blinks every second with black/white for \"count\" times)",
+      title: "1..10 - Blink content count (blinks with black/white for \"count\" times)",
       default: 0,
       "enum": [0,1,2,3,4,5,6,7,8,9,10]
     },
     updown: {
       type: "number",
-      title: "0 use up/down buttons for scrolling, 1 use up/down buttons for update, appending up=1|2/down=1|2 params (1=short/2=long)",
-      default: 0
+      title: "Up/Down buttons",
+      default: 0,
+      "enum": [0,1],
+      enumNames: ["Use up/down buttons for scrolling", "Use up/down buttons for update, appending up=1|2/down=1|2 params (1=short/2=long)"]
     },
     elements: {
       type: "array",
@@ -175,6 +179,14 @@ plugin.start = function(props) {
         }).skipDuplicates().onValue(elementIndex => {
           addToJson(key, elementIndex, show, conversion)
         }))
+
+
+
+        //experimental, perhaps better to populate in content?:
+        //var keyValue = _.get(app.signalk.self, key + ".value")
+        //if (typeof keyValue == 'undefined'){keyValue = "N/A"}
+        //jsonContent += show + ": " + keyValue + "\n"
+
       }
       return acc
     }, [])
