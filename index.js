@@ -116,8 +116,8 @@ module.exports = function(app) {
             type: "string",
             default: "none",
             "description": "Convert from SI to display units",
-            "enum": ["none", "rad_deg", "ms_kn", "ratio_percent"],
-            enumNames: ["none", "radians to deg", "m/s to knots", "ratio to percent"]
+            "enum": ["none", "rad_deg", "rad_card", "ms_kn", "ratio_percent"],
+            enumNames: ["none", "radians to deg", "radians to Cardinal (SW, NE, SSW)", "m/s to knots", "ratio to percent"]
 
       },
       "units": {
@@ -187,14 +187,6 @@ plugin.start = function(props) {
         }).skipDuplicates().onValue(elementIndex => {
           addToJson(key, elementIndex, show, conversion)
         }))
-
-
-
-        //experimental, perhaps better to populate in content?:
-        //var keyValue = _.get(app.signalk.self, key + ".value")
-        //if (typeof keyValue == 'undefined'){keyValue = "N/A"}
-        //jsonContent += show + ": " + keyValue + "\n"
-
       }
       return acc
     }, [])
@@ -210,6 +202,10 @@ plugin.registerWithRouter = function(router) {
 
           if (element.conversion != "none"){
             if (element.conversion == "rad_deg"){keyValue *= (180 / Math.PI)}
+            if (element.conversion == "rad_card"){
+              keyValue *= (180 / Math.PI)
+              //only temporary
+            }
             if (element.conversion == "ms_kn"){keyValue *= (3600/1852)}
             if (element.conversion == "ratio_percent"){keyValue *= 100}
           }
@@ -217,6 +213,10 @@ plugin.registerWithRouter = function(router) {
           var displayUnit = ""
           if (element.units == true){
             if (element.conversion == "rad_deg"){displayUnit = "\xB0"}
+            if (element.conversion == "rad_card"){
+              keyValue = getCardinal(keyValue)
+              displayUnit = ""
+            }
             if (element.conversion == "ms_kn"){displayUnit = " kn"}
             if (element.conversion == "ratio_percent"){displayUnit = " %"}
           }
@@ -259,4 +259,32 @@ plugin.stop = function() {
 
 
   return plugin
+}
+
+//given "0-360" returns the nearest cardinal direction "N/NE/E/SE/S/SW/W/NW/N"
+function getCardinal(angle) {
+    //easy to customize by changing the number of directions you have
+    var directions = 8;
+
+    var degree = 360 / directions;
+    angle = angle + degree/2;
+
+    if (angle >= 0 * degree && angle < 1 * degree)
+        return "N";
+    if (angle >= 1 * degree && angle < 2 * degree)
+        return "NE";
+    if (angle >= 2 * degree && angle < 3 * degree)
+        return "E";
+    if (angle >= 3 * degree && angle < 4 * degree)
+        return "SE";
+    if (angle >= 4 * degree && angle < 5 * degree)
+        return "S";
+    if (angle >= 5 * degree && angle < 6 * degree)
+        return "SW";
+    if (angle >= 6 * degree && angle < 7 * degree)
+        return "W";
+    if (angle >= 7 * degree && angle < 8 * degree)
+        return "NW";
+    //Should never happen:
+    return "N";
 }
