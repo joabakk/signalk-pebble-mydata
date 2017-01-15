@@ -116,9 +116,17 @@ module.exports = function(app) {
             type: "string",
             default: "none",
             "description": "Convert from SI to display units",
-            "enum": ["none", "some"]
+            "enum": ["none", "rad_deg", "ms_kn", "ratio_percent"],
+            enumNames: ["none", "radians to deg", "m/s to knots", "ratio to percent"]
 
-      }
+      },
+      "units": {
+        title: "Show unit",
+        type: "boolean",
+        default: false,
+        "description": "Show unit after value on Pebble"
+
+  }
       }
     }
   }
@@ -199,8 +207,20 @@ plugin.registerWithRouter = function(router) {
       router.get("/pebble.json", (req, res) => {
         var add = elements.map((element, i) => {
           var keyValue = _.get(app.signalk.self, element.key)
+
+          if (element.conversion != "none"){
+            if (element.conversion == "rad_deg"){keyValue *= (180 / Math.PI)}
+            if (element.conversion == "ms_kn"){keyValue *= (3600/1852)}
+            if (element.conversion == "ratio_percent"){keyValue *= 100}
+          }
           if (typeof keyValue == 'undefined'){keyValue = "N/A"}else{keyValue = keyValue.toFixed(2)}
-          jsonContent += element.show + ": " + keyValue + "\n"
+          var displayUnit = ""
+          if (element.units == true){
+            if (element.conversion == "rad_deg"){displayUnit = "\xB0"}
+            if (element.conversion == "ms_kn"){displayUnit = " kn"}
+            if (element.conversion == "ratio_percent"){displayUnit = " %"}
+          }
+          jsonContent += element.show + ": " + keyValue + displayUnit + "\n"
           })
         debug("jsonContent: " + jsonContent)
 
