@@ -12,6 +12,6 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"dependencies": {
-		"react-jsonschema-form": "^0.41.2"
+		"react-jsonschema-form": "^0.43.0"
 	}
 }
