@@ -6,9 +6,7 @@
 		"signalk-node-server-plugin"
 	],
 	"license": "Apache-2.0",
-	"author": {
-		"name": "Joachim Bakke"
-	},
+	"author": "Joachim Bakke",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +14,5 @@
 	"dependencies": {
 		"react-jsonschema-form": "^0.45.0"
 	},
-	"devDependencies": {},
-	"optionalDependencies": {},
-	"readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app ",
+	"readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app "
+}
