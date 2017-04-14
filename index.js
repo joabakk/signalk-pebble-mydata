@@ -5,11 +5,13 @@ const debug = require('debug')('signalk-pebble-mydata')
 const _ = require('lodash')
 const util = require('util')
 
+
 const relevantKeys = Object.keys(signalkSchema.metadata)
 .filter(s => s.indexOf('/vessels/*') >= 0)
 .map(s => s.replace('/vessels/*', '').replace(/\//g, '.').replace(/RegExp/g, '*').substring(1)).sort()
 
 var jsonContent = ""
+var refresh, vibrate, font, scroll, light, blink, updown, elements
 
 module.exports = function(app) {
   var plugin = {}
@@ -146,6 +148,7 @@ module.exports = function(app) {
     updown = props.updown
     elements = props.elements
     debug("starting...")
+    debug("elements: " + util.inspect(elements))
     debug("started")
 
     unsubscribes = (props.elements || []).reduce((acc, {
@@ -181,6 +184,7 @@ module.exports = function(app) {
 
   function sendCommand(elements)
   {
+    debug(util.inspect(elements))
     const tests = elements.map((element, i) => {
       var keyValue = _.get(app.signalk.self, element.key)
       if (typeof keyValue == 'undefined'){
