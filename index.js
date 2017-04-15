@@ -103,6 +103,7 @@ module.exports = function(app) {
                 "environment.current.drift",
                 "performance.polarSpeedRatio.value",
                 "performance.targetAngle.value",
+                "performance.targetSpeed.value",
                 "navigation.speedOverGround.value",
               ]
             },
