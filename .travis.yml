@@ -1,7 +1,7 @@
 deploy:
   language: node_js
   node_js:
-    - "6"
+    - 6
   provider: npm
   email: npm@heiamoss.com
   api_key:
