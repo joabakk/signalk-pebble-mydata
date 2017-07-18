@@ -8,9 +8,9 @@
   "license": "Apache-2.0",
   "author": "Joachim Bakke",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+	"scripts": {
+		"test": "mocha"
+	},
   "dependencies": {
     "chai": "^4.1.0",
     "react-jsonschema-form": "^0.45.0"
