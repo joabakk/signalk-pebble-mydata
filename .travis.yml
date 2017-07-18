@@ -1,4 +1,5 @@
 deploy:
+  language: node_js
   provider: npm
   email: npm@heiamoss.com
   api_key:
