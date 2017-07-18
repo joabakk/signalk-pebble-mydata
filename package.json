@@ -1,20 +1,21 @@
 {
-  "name": "signalk-pebble-mydata",
-  "version": "0.6.0",
-  "description": "A signalk node plugin to show boat data on Pebble smartwatch",
-  "keywords": [
-    "signalk-node-server-plugin"
-  ],
-  "license": "Apache-2.0",
-  "author": "Joachim Bakke",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "chai": "^4.1.0",
-    "mocha": "^3.4.2",
-    "react-jsonschema-form": "^0.45.0"
-  },
-  "readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app "
+	"name": "signalk-pebble-mydata",
+	"version": "0.6.1",
+	"description": "A signalk node plugin to show boat data on Pebble smartwatch",
+	"main": "index.js",
+	"keywords": [
+		"signalk-node-server-plugin"
+	],
+	"license": "Apache-2.0",
+	"author": "Joachim Bakke",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha"
+	},
+	"dependencies": {
+		"chai": "^4.1.0",
+		"mocha": "^3.4.2",
+		"react-jsonschema-form": "^0.45.0"
+	},
+	"readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app "
 }
