@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"chai": "^4.1.0",
-		"mocha": "^3.4.2",
+		"mocha": "^4.0.1",
 		"react-jsonschema-form": "^0.50.1"
 	},
 	"readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app "
