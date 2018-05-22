@@ -187,10 +187,10 @@ module.exports = function(app) {
   {
     debug(util.inspect(elements))
     const tests = elements.map((element, i) => {
-      var keyValue = _.get(app.signalk.self, element.key)
+      var keyValue = app.getSelfPath(element.key)
       if (typeof keyValue == 'undefined'){
         var valueKey = element.key + ".value"
-        keyValue = _.get(app.signalk.self, valueKey)
+        keyValue = app.getSelfPath(valueKey)
       }
 
       if (element.conversion != "none"){
