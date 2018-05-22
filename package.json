@@ -1,6 +1,6 @@
 {
 	"name": "signalk-pebble-mydata",
-	"version": "0.6.3",
+	"version": "0.6.4",
 	"description": "A signalk node plugin to show boat data on Pebble smartwatch",
 	"main": "index.js",
 	"keywords": [
@@ -10,7 +10,6 @@
 	"author": {
 		"name": "Joachim Bakke"
 	},
-	"main": "index.js",
 	"scripts": {
 		"test": "mocha"
 	},
