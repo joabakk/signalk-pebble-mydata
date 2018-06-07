@@ -24,7 +24,7 @@ module.exports = function(app) {
   plugin.schema = {
     type: "object",
     title: "A signalk node plugin to show boat data on Pebble smartwatch",
-    description: "Point your MyData app to the address: http://<IP>:<port>/plugins/" + plugin.id + "/pebble.json",
+    description: "Point your MyData app to the address: http://<IP>:<port>/pebble.json",
     required: [
       "refresh", "vibrate", "font", "theme", "scroll", "light", "blink", "updown"
     ],
@@ -176,7 +176,7 @@ module.exports = function(app) {
 
 
   plugin.registerWithRouter = function(router) {
-    router.get("/pebble.json", (req, res) => {
+    app.get("/pebble.json", (req, res) => {
       res.contentType('application/json')
       json = sendCommand(elements)
       res.send(json)
