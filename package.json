@@ -16,7 +16,7 @@
     "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
-    "@signalk/signalk-schema": "^1.0.3",
+    "@signalk/signalk-schema": "^1.5.1",
     "baconjs": "^3.0.15",
     "chai": "^4.1.0",
     "mocha": "^5.0.0",
