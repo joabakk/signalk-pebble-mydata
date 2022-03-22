@@ -19,7 +19,7 @@
     "@signalk/signalk-schema": "^1.0.3",
     "baconjs": "^3.0.15",
     "chai": "^4.3.0",
-    "mocha": "^5.0.0",
+    "mocha": "^6.2.3",
     "react-jsonschema-form": "^1.0.0",
     "snyk": "^1.388.0"
   },
