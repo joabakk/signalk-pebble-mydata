@@ -21,7 +21,7 @@
     "chai": "^4.3.0",
     "mocha": "^5.0.0",
     "react-jsonschema-form": "^1.0.0",
-    "snyk": "^1.680.0"
+    "snyk": "^1.996.0"
   },
   "readme": "# signalk-pebble-mydata[![Greenkeeper badge](https://badges.greenkeeper.io/joabakk/signalk-pebble-mydata.svg)](https://greenkeeper.io/)A Signal K plugin (for signalk-server-node) to send selected data to a generated json which can be adressed by the https://github.com/bahbka/pebble-my-data app ",
   "snyk": true
